@@ -33,7 +33,6 @@
 
     *{box-sizing:border-box}
     html,body{height:100%}
-
     @media (prefers-reduced-motion: no-preference){
       html{ scroll-behavior:smooth; }
     }
@@ -50,6 +49,7 @@
       line-height:1.55;
     }
 
+    /* Skip link */
     .skip-link{
       position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden;
     }
@@ -80,9 +80,7 @@
       box-shadow: var(--shadow);
     }
 
-    .links{
-      display:flex; align-items:center; gap:6px; flex-wrap:wrap;
-    }
+    .links{ display:flex; align-items:center; gap:6px; flex-wrap:wrap; }
     .links a{
       color:var(--muted); text-decoration:none; font-weight:700; font-size:14px;
       padding:8px 10px; border-radius:10px;
@@ -115,10 +113,9 @@
       margin: 0 0 8px;
       letter-spacing: .2px;
     }
-    .subtitle{
-      color:var(--muted); margin: 0 0 22px; font-weight:700;
-    }
+    .subtitle{ color:var(--muted); margin: 0 0 22px; font-weight:700; }
 
+    /* Countdown */
     .countdown{
       display:grid; grid-template-columns: repeat(4, minmax(82px, 1fr));
       gap:14px; max-width: 780px;
@@ -155,14 +152,13 @@
     }
     .time-label{ color:var(--muted); font-weight:800 }
 
-    .hero-tags{
-      margin-top: 18px; display:flex; flex-wrap: wrap; gap:10px;
-    }
+    .hero-tags{ margin-top: 18px; display:flex; flex-wrap: wrap; gap:10px; }
     .chip{
       padding:8px 12px; border-radius: 100px; border:1px solid var(--border);
       background: rgba(255,255,255,0.06); color:var(--muted); font-weight:800; font-size: 13px;
     }
 
+    /* Layout */
     .wrap{ max-width: var(--maxw); margin: 0 auto; padding: 28px var(--mx) 90px; container-type: inline-size; }
     .section{ margin-top: 28px; container-type: inline-size; }
     .h2{ font-size: clamp(18px, 2.4vw, 28px); font-weight: 900; margin: 0 0 12px; }
@@ -207,6 +203,7 @@
     .what{ font-weight:800 }
     .hint{ color:var(--muted); font-weight:700 }
 
+    /* Table */
     .table{ width:100%; border-collapse: collapse; overflow:hidden; border-radius: var(--radius); border:1px solid var(--border); }
     .table th, .table td{ padding:12px 14px; border-bottom:1px solid var(--border); text-align:left; }
     .table thead th{
@@ -218,6 +215,7 @@
     .b-chem{ background: rgba(121,192,255,0.12); color: var(--chem) }
     .b-phys{ background: rgba(255,184,108,0.12); color: var(--phys) }
 
+    /* Quote */
     .quote{
       font-size: clamp(16px, 2.2vw, 20px);
       font-weight:900; line-height:1.4; padding: 16px;
@@ -225,6 +223,7 @@
       background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
     }
 
+    /* Footer */
     .footer{
       margin-top: 28px; padding: 18px var(--mx);
       border-top:1px solid var(--border);
@@ -233,11 +232,12 @@
     }
     .footer-inner{ max-width: var(--maxw); margin: 0 auto; font-weight:800 }
 
+    /* A11y and utilities */
+    :focus-visible{ outline: var(--ring); outline-offset: 2px; }
     .row .mark{ font-weight:900 }
     .ok{ color: var(--success) }
     .warn{ color: var(--warning) }
     .danger{ color: var(--danger) }
-    :focus-visible{ outline: var(--ring); outline-offset: 2px; }
 
     /* Back to top button (enhanced) */
     #backTop{
@@ -557,7 +557,7 @@
       </div>
       <div class="card">
         <h3 class="card-title">💪 Success Mantra</h3>
-        <div class="quote" id="mantraText">“Treat meal times and sleep as non-negotiable as study sessions.This routine for 8 months = NEET 2026 SUCCESS!”</div>
+        <div class="quote" id="mantraText">“Treat meal times and sleep as non-negotiable as study sessions. This routine for 8 months = NEET 2026 SUCCESS!”</div>
         <p class="sub">Final Goal: NEET 2026 — <span id="goal-days">…</span> Days to Go! • MD Soliuddin | Consistency + Discipline = Medical College 🏥</p>
       </div>
     </section>
@@ -583,7 +583,7 @@
       });
     })();
 
-    // Back to top reveal + behavior (earlier threshold, keyboard-supported)
+    // Back to top reveal + behavior
     (function(){
       const btn = document.getElementById('backTop');
       const prefersReduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -639,33 +639,33 @@
       const timer = setInterval(tick, 1000);
     })();
 
-    // Success mantra rotation every 1 minute
+    // Success mantra rotation every 1 minute (with extended quotes)
     (function(){
       const el = document.getElementById('mantraText');
       if(!el) return;
+
       const mantras = [
-        '“Treat meal times and sleep as non-negotiable as study sessions. This routine for 8 months = NEET 2026 SUCCESS!”',
-        '“Small wins daily → Big results in May 2026. Show up, focus, repeat.”',
-        '“Concepts by morning, practice by afternoon, memory by night — disciplined cycles win.”',
-        '“Physics clarity grows with consistent problems; trust the process.”',
-        '“Organic pathways are maps — revise mechanisms until they feel obvious.”',
-        '“NCERT first, then depth — accuracy beats speed, then speed follows.”'
-        '“NEET UG isnt about studying more its about practicing SMARTER!” '
-        '“Believe you can and you’re halfway there.” '
-        '“The best way to predict the future is to create it.” '
-        '“It does not matter how slowly you go as long as you do not stop.”'
-        '“Your limitation—it’s only your imagination.”'
-        '“Push yourself, because no one else is going to do it for you.”'
-        '“Do something today that your future self will thank you for.”'
-        '“The difference between ordinary and extraordinary is that little extra.”'
-        '“Success doesn’t just find you. You have to go out and get it.”'
-        '“If you can dream it, you can do it.”'
-        '“Winners are not people who never fail, but people who never quit.”'
-       '“Don’t stop when you’re tired. Stop when you’re done.”'
-       '“Great things never come from comfort zones.”'
-         
-        
+        `“Treat meal times and sleep as non-negotiable as study sessions. This routine for 8 months = NEET 2026 SUCCESS!”`,
+        `“Small wins daily → Big results in May 2026. Show up, focus, repeat.”`,
+        `“Concepts by morning, practice by afternoon, memory by night — disciplined cycles win.”`,
+        `“Physics clarity grows with consistent problems; trust the process.”`,
+        `“Organic pathways are maps — revise mechanisms until they feel obvious.”`,
+        `“NCERT first, then depth — accuracy beats speed, then speed follows.”`,
+        `“NEET UG isnt about studying more its about practicing SMARTER!”`,
+        `“Believe you can and you’re halfway there.”`,
+        `“The best way to predict the future is to create it.”`,
+        `“It does not matter how slowly you go as long as you do not stop.”`,
+        `“Your limitation—it’s only your imagination.”`,
+        `“Push yourself, because no one else is going to do it for you.”`,
+        `“Do something today that your future self will thank you for.”`,
+        `“The difference between ordinary and extraordinary is that little extra.”`,
+        `“Success doesn’t just find you. You have to go out and get it.”`,
+        `“If you can dream it, you can do it.”`,
+        `“Winners are not people who never fail, but people who never quit.”`,
+        `“Don’t stop when you’re tired. Stop when you’re done.”`,
+        `“Great things never come from comfort zones.”`
       ];
+
       let i = 0;
       function swap(){
         i = (i + 1) % mantras.length;
