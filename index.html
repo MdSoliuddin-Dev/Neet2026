@@ -1,0 +1,664 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>NEET 2026 Master Routine — MD Soliuddin</title>
+  <meta name="theme-color" content="#0b0f1a" />
+  <style>
+    :root{
+      --bg: #0b0f1a;
+      --bg-soft: #0f1526;
+      --card: rgba(255,255,255,0.06);
+      --card-strong: rgba(255,255,255,0.1);
+      --border: rgba(255,255,255,0.12);
+      --text: #e8ecf3;
+      --muted: #aab3c5;
+      --accent: #6ae4ff;
+      --accent-2: #8b6bff;
+      --success: #65f1b2;
+      --warning: #ffd166;
+      --danger: #ff6b6b;
+      --bio: #7ee787;
+      --chem: #79c0ff;
+      --phys: #ffb86c;
+      --shadow: 0 10px 30px rgba(0,0,0,0.35);
+      --radius: 18px;
+      --radius-sm: 12px;
+      --radius-lg: 24px;
+      --mx: 20px;
+      --maxw: 1200px;
+      --ring: 2px solid rgba(106, 228, 255, .45);
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+
+    @media (prefers-reduced-motion: no-preference){
+      html{ scroll-behavior:smooth; }
+    }
+
+    body{
+      margin:0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(1200px 600px at 100% -10%, rgba(138,99,255,0.22), transparent 60%),
+        radial-gradient(1000px 500px at -10% 0%, rgba(55,195,255,0.2), transparent 60%),
+        linear-gradient(180deg, #090c17, #0b0f1a 40%, #0a0d19 100%);
+      background-attachment: fixed;
+      line-height:1.55;
+    }
+
+    .skip-link{
+      position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden;
+    }
+    .skip-link:focus{
+      left:10px; top:10px; width:auto; height:auto; padding:10px 12px; z-index:1000;
+      background:var(--bg-soft); color:var(--text); border-radius:10px; border:1px solid var(--border);
+      outline:none;
+    }
+
+    /* Sticky, glassy navbar with mobile menu */
+    .nav {
+      position: sticky; top:0; z-index: 100;
+      backdrop-filter: blur(10px);
+      background: rgba(8,12,22,0.55);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner{
+      max-width: var(--maxw); margin:0 auto; padding: 10px var(--mx);
+      display:flex; align-items:center; gap:14px; justify-content: space-between;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px; font-weight:800; letter-spacing: .3px;
+    }
+    .brand-badge{
+      width:34px; height:34px; border-radius:10px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      display:grid; place-items:center; color:#0b0f1a; font-weight:900;
+      box-shadow: var(--shadow);
+    }
+
+    .links{
+      display:flex; align-items:center; gap:6px; flex-wrap:wrap;
+    }
+    .links a{
+      color:var(--muted); text-decoration:none; font-weight:700; font-size:14px;
+      padding:8px 10px; border-radius:10px;
+    }
+    .links a:hover, .links a:focus-visible{
+      color:var(--text); background: rgba(255,255,255,0.06); outline:none;
+    }
+
+    .menu-toggle{ display:none; }
+    @media (max-width: 860px){
+      .menu-toggle{ display:inline-flex; align-items:center; gap:6px; }
+      .links{ display:none; width:100%; position:absolute; left:0; top:56px; padding:10px var(--mx);
+              background: rgba(8,12,22,0.92); border-bottom:1px solid var(--border); }
+      .links.open{ display:flex; flex-wrap:wrap; }
+    }
+
+    header, main, footer { scroll-margin-top: 84px; }
+    .hero{
+      padding: 40px var(--mx) 24px;
+      border-bottom: 1px solid var(--border);
+      background:
+        radial-gradient(800px 300px at 50% -10%, rgba(255,255,255,0.06), transparent 60%),
+        linear-gradient(180deg, rgba(106,228,255,0.06), rgba(139,107,255,0.06));
+    }
+    .hero-inner{ max-width: var(--maxw); margin: 0 auto; }
+    .title{
+      font-size: clamp(24px, 3.5vw, 46px);
+      line-height: 1.15;
+      font-weight:900;
+      margin: 0 0 8px;
+      letter-spacing: .2px;
+    }
+    .subtitle{
+      color:var(--muted); margin: 0 0 22px; font-weight:700;
+    }
+
+    .countdown{
+      display:grid; grid-template-columns: repeat(4, minmax(82px, 1fr));
+      gap:14px; max-width: 780px;
+    }
+    .time-card{
+      position:relative;
+      background: var(--card);
+      border:1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 14px;
+      display:grid; place-items:center; overflow:hidden;
+      isolation:isolate;
+    }
+    .time-card::before{
+      content:"";
+      position:absolute; inset:-1px; border-radius: inherit;
+      background: conic-gradient(from 0deg, var(--accent), var(--accent-2), var(--accent));
+      opacity: .18; filter: blur(12px); z-index: -1;
+      transform: rotate(0deg);
+      transition: opacity .3s ease;
+    }
+    .time-card:hover::before{ opacity: .28; }
+    @media (prefers-reduced-motion: no-preference){
+      @keyframes spin { to { transform: rotate(360deg); } }
+      .time-card::before{ animation: spin 14s linear infinite; }
+    }
+    .time-value{
+      font-size: clamp(22px, 3.8vw, 42px);
+      font-weight: 900;
+      letter-spacing: 1px;
+      background: linear-gradient(180deg, #fff, #d9e7ff);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .time-label{ color:var(--muted); font-weight:800 }
+
+    .hero-tags{
+      margin-top: 18px; display:flex; flex-wrap: wrap; gap:10px;
+    }
+    .chip{
+      padding:8px 12px; border-radius: 100px; border:1px solid var(--border);
+      background: rgba(255,255,255,0.06); color:var(--muted); font-weight:800; font-size: 13px;
+    }
+
+    .wrap{ max-width: var(--maxw); margin: 0 auto; padding: 28px var(--mx) 90px; container-type: inline-size; }
+    .section{ margin-top: 28px; container-type: inline-size; }
+    .h2{ font-size: clamp(18px, 2.4vw, 28px); font-weight: 900; margin: 0 0 12px; }
+    .sub{ color:var(--muted); margin: 0 0 16px; font-weight:700; }
+
+    .grid{ display:grid; gap:16px; grid-template-columns: 1fr; }
+    @container (inline-size > 740px){ .grid-2{ grid-template-columns: 1fr 1fr; } }
+    @container (inline-size > 1020px){ .grid-3{ grid-template-columns: 1fr 1fr 1fr; } }
+
+    .card{
+      position:relative; overflow:hidden; isolation:isolate;
+      background: var(--card);
+      border:1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 16px;
+    }
+    .card::after{
+      content:"";
+      position:absolute; inset:0; border-radius: inherit;
+      background: radial-gradient(500px 140px at 10% -20%, rgba(106,228,255,0.10), transparent 60%),
+                  radial-gradient(600px 160px at 110% -30%, rgba(139,107,255,0.10), transparent 60%);
+      z-index:-1;
+    }
+
+    .card-title{ display:flex; align-items:center; gap:10px; margin:0 0 8px; font-weight: 900; }
+    .pill{
+      padding:6px 10px; border-radius: 10px; font-weight:900; font-size: 12px;
+      background: rgba(255,255,255,0.06); border:1px solid var(--border); color:var(--muted);
+    }
+    .tag-bio{ color: var(--bio) }
+    .tag-chem{ color: var(--chem) }
+    .tag-phys{ color: var(--phys) }
+
+    .timeline{ display:grid; gap:10px; }
+    .row{
+      display:flex; gap:12px; align-items:flex-start;
+      padding:10px; border-radius: 12px; border:1px dashed rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.04);
+    }
+    .time{ min-width: 112px; font-weight:900; color:var(--muted) }
+    .what{ font-weight:800 }
+    .hint{ color:var(--muted); font-weight:700 }
+
+    .table{ width:100%; border-collapse: collapse; overflow:hidden; border-radius: var(--radius); border:1px solid var(--border); }
+    .table th, .table td{ padding:12px 14px; border-bottom:1px solid var(--border); text-align:left; }
+    .table thead th{
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+      font-weight:900; letter-spacing:.2px;
+    }
+    .badge{ font-weight:900; padding:4px 8px; border-radius: 8px; border:1px solid var(--border); }
+    .b-bio{ background: rgba(126,231,135,0.12); color: var(--bio) }
+    .b-chem{ background: rgba(121,192,255,0.12); color: var(--chem) }
+    .b-phys{ background: rgba(255,184,108,0.12); color: var(--phys) }
+
+    .quote{
+      font-size: clamp(16px, 2.2vw, 20px);
+      font-weight:900; line-height:1.4; padding: 16px;
+      border-radius: var(--radius); border:1px solid var(--border);
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+    }
+
+    .footer{
+      margin-top: 28px; padding: 18px var(--mx);
+      border-top:1px solid var(--border);
+      color: var(--muted);
+      background: rgba(255,255,255,0.03);
+    }
+    .footer-inner{ max-width: var(--maxw); margin: 0 auto; font-weight:800 }
+
+    .row .mark{ font-weight:900 }
+    .ok{ color: var(--success) }
+    .warn{ color: var(--warning) }
+    .danger{ color: var(--danger) }
+    :focus-visible{ outline: var(--ring); outline-offset: 2px; }
+
+    /* Back to top button (enhanced) */
+    #backTop{
+      position: fixed; right:16px; bottom:16px; z-index:90;
+      width:48px; height:48px; border-radius:999px;
+      display:grid; place-items:center;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color:#0b0f1a; border:none; font-weight:900;
+      box-shadow: var(--shadow);
+      opacity:0; pointer-events:none; transform: translateY(10px);
+      transition: opacity .25s ease, transform .25s ease, filter .2s ease;
+    }
+    #backTop:hover{ filter: brightness(1.05); }
+    #backTop.show{ opacity:1; pointer-events:auto; transform: translateY(0); }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#overview">Skip to content</a>
+
+  <!-- NAV -->
+  <div class="nav">
+    <div class="nav-inner">
+      <div class="brand" aria-label="Site brand">
+        <div class="brand-badge" aria-hidden="true">NS</div>
+        <div>NEET 2026 — MD Soliuddin</div>
+      </div>
+      <button class="menu-toggle" aria-controls="site-links" aria-expanded="false">☰ Menu</button>
+    </div>
+    <div class="nav-inner">
+      <div id="site-links" class="links" role="navigation" aria-label="Primary">
+        <a href="#overview">Overview</a>
+        <a href="#blocks">Daily Blocks</a>
+        <a href="#weekly">Weekly</a>
+        <a href="#distribution">Time Table</a>
+        <a href="#meals">Meals & Care</a>
+        <a href="#logic">Study Logic</a>
+        <a href="#roadmap">Roadmap</a>
+        <a href="#tracking">Tracking</a>
+        <a href="#mantra">Mantra</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero-inner">
+      <h1 class="title">🏆 NEET 2026 MASTER ROUTINE</h1>
+      <p class="subtitle">Complete Daily Life & Study Schedule • MD Soliuddin — NEET Aspirant 2026</p>
+
+      <div class="countdown" aria-label="Countdown to NEET 2026">
+        <div class="time-card" aria-live="polite">
+          <div id="cd-days" class="time-value">000</div>
+          <div class="time-label">Days</div>
+        </div>
+        <div class="time-card" aria-live="polite">
+          <div id="cd-hours" class="time-value">00</div>
+          <div class="time-label">Hours</div>
+        </div>
+        <div class="time-card" aria-live="polite">
+          <div id="cd-mins" class="time-value">00</div>
+          <div class="time-label">Minutes</div>
+        </div>
+        <div class="time-card" aria-live="polite">
+          <div id="cd-secs" class="time-value">00</div>
+          <div class="time-label">Seconds</div>
+        </div>
+      </div>
+
+      <div class="hero-tags">
+        <span class="chip">Exam Date: 03 May 2026 (IST)</span>
+        <span class="chip">Live Countdown</span>
+        <span class="chip">Responsive • Phone • Tablet • Laptop</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap" id="overview">
+    <!-- OVERVIEW -->
+    <section class="section">
+      <h2 class="h2">⏰ Daily Schedule Overview (7:00 AM – 12:00 AM)</h2>
+      <p class="sub">A high-performance routine with fixed meals and sleep for sustained focus and long-term retention across Biology, Chemistry, and Physics. </p>
+    </section>
+
+    <!-- DAILY BLOCKS -->
+    <section id="blocks" class="section grid grid-3">
+      <!-- Morning -->
+      <div class="card">
+        <h3 class="card-title">🌅 Morning Power Block <span class="pill">7:00 AM – 1:45 PM</span></h3>
+        <div class="timeline">
+          <div class="row"><div class="time">7:00 AM</div><div><div class="what">Wake up + Light stretching <span class="hint">(10 min)</span></div></div></div>
+          <div class="row"><div class="time">7:10 AM</div><div><div class="what">Fresh up + Bath <span class="hint">(20 min)</span></div></div></div>
+          <div class="row"><div class="time">7:30 AM</div><div><div class="what">Quick breakfast <span class="hint">(15 min)</span></div></div></div>
+          <div class="row"><div class="time">7:45 AM</div><div><div class="what">🧬 <span class="mark tag-bio">BIOLOGY</span> — New chapters <span class="hint">(2h 45m) [PEAK BRAIN TIME]</span></div></div></div>
+          <div class="row"><div class="time">10:30 AM</div><div><div class="what">☕ Tea/coffee break <span class="hint">(15 min)</span></div></div></div>
+          <div class="row"><div class="time">10:45 AM</div><div><div class="what">⚗️ <span class="mark tag-chem">CHEMISTRY</span> — New concepts <span class="hint">(3h) [HIGH FOCUS TIME]</span></div></div></div>
+          <div class="row"><div class="time">1:45 PM</div><div><div class="what">🍽️ Lunch + Rest <span class="hint">(30 min)</span></div></div></div>
+        </div>
+      </div>
+
+      <!-- Afternoon -->
+      <div class="card">
+        <h3 class="card-title">☀️ Afternoon Energy Block <span class="pill">2:15 PM – 8:45 PM</span></h3>
+        <div class="timeline">
+          <div class="row"><div class="time">2:15 PM</div><div><div class="what">⚡ <span class="mark tag-phys">PHYSICS</span> — Theory concepts <span class="hint">(1h 45m) [EXTENDED]</span></div></div></div>
+          <div class="row"><div class="time">4:00 PM</div><div><div class="what">🧬 <span class="mark tag-bio">BIOLOGY</span> — Revision + Diagrams <span class="hint">(1h 30m)</span></div></div></div>
+          <div class="row"><div class="time">5:30 PM</div><div><div class="what">🥜 Snack + Walk break <span class="hint">(15 min)</span></div></div></div>
+          <div class="row"><div class="time">5:45 PM</div><div><div class="what">⚗️ <span class="mark tag-chem">CHEMISTRY</span> — Problems + Revision <span class="hint">(2h)</span></div></div></div>
+          <div class="row"><div class="time">7:45 PM</div><div><div class="what">⚡ <span class="mark tag-phys">PHYSICS</span> — Numericals <span class="hint">(1h) [CALCULATION]</span></div></div></div>
+        </div>
+      </div>
+
+      <!-- Evening -->
+      <div class="card">
+        <h3 class="card-title">🌙 Evening Consolidation Block <span class="pill">8:45 PM – 12:00 AM</span></h3>
+        <div class="timeline">
+          <div class="row"><div class="time">8:45 PM</div><div><div class="what">🍽️ Dinner + Family time <span class="hint">(45 min)</span></div></div></div>
+          <div class="row"><div class="time">9:30 PM</div><div><div class="what">🧬 <span class="mark tag-bio">BIOLOGY</span> — MCQs + Memorization <span class="hint">(1h 30m) [MEMORY]</span></div></div></div>
+          <div class="row"><div class="time">11:00 PM</div><div><div class="what">🧬 Biology — Quick revision <span class="hint">(15 min)</span></div></div></div>
+          <div class="row"><div class="time">11:15 PM</div><div><div class="what">⚗️ Chemistry — Formula review <span class="hint">(15 min)</span></div></div></div>
+          <div class="row"><div class="time">11:30 PM</div><div><div class="what">⚡ Physics — Formula memorization <span class="hint">(15 min)</span></div></div></div>
+          <div class="row"><div class="time">11:45 PM</div><div><div class="what">📝 Next day planning + Wind down <span class="hint">(15 min)</span></div></div></div>
+          <div class="row"><div class="time">12:00 AM</div><div><div class="what">😴 Sleep</div></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WEEKLY PRIORITY -->
+    <section id="weekly" class="section grid grid-3">
+      <div class="card">
+        <h3 class="card-title">🧬 Biology Dominant Days <span class="pill">Mon • Wed • Fri</span></h3>
+        <p class="sub"><span class="mark tag-bio">Total Biology Time: 6 hours</span></p>
+        <div class="timeline">
+          <div class="row"><div class="time">Morning</div><div><div class="what">BIOLOGY — 2h 45m (New chapters)</div></div></div>
+          <div class="row"><div class="time">Afternoon</div><div><div class="what">BIOLOGY — 1h 30m (Revision + Diagrams)</div></div></div>
+          <div class="row"><div class="time">Night</div><div><div class="what">BIOLOGY — 1h 45m (MCQs + Memory)</div></div></div>
+          <div class="row"><div class="time">Focus</div><div><div class="what">Human Physiology • Plant Physiology • Genetics</div></div></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 class="card-title">⚗️ Chemistry Dominant Days <span class="pill">Tue • Thu • Sat</span></h3>
+        <p class="sub"><span class="mark tag-chem">Total Chemistry Time: 6 hours</span></p>
+        <div class="timeline">
+          <div class="row"><div class="time">Morning</div><div><div class="what">CHEMISTRY — 3h 30m (New concepts + Organic)</div></div></div>
+          <div class="row"><div class="time">Evening</div><div><div class="what">CHEMISTRY — 2h 30m (Problems + Inorganic)</div></div></div>
+          <div class="row"><div class="time">Focus</div><div><div class="what">Organic reactions • Physical numericals • Inorganic facts</div></div></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 class="card-title">📊 Balanced Review Day <span class="pill">Sunday</span></h3>
+        <div class="timeline">
+          <div class="row"><div class="time">Morning</div><div><div class="what">Mixed subject quick revision (3h)</div></div></div>
+          <div class="row"><div class="time">Afternoon</div><div><div class="what">Full NEET Mock Test (3h)</div></div></div>
+          <div class="row"><div class="time">Evening</div><div><div class="what">Test analysis + Weak area practice (3h)</div></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TIME DISTRIBUTION TABLE -->
+    <section id="distribution" class="section">
+      <h2 class="h2">📈 Daily Time Distribution</h2>
+      <div class="card" style="padding:0">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>📚 Subject</th>
+              <th>🌅 Morning</th>
+              <th>☀️ Afternoon</th>
+              <th>🌙 Evening</th>
+              <th>⏱️ Total Daily</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="badge b-bio">🧬 Biology</span></td>
+              <td>2h 45m</td>
+              <td>1h 30m</td>
+              <td>1h 45m</td>
+              <td>6h 00m ✨</td>
+            </tr>
+            <tr>
+              <td><span class="badge b-chem">⚗️ Chemistry</span></td>
+              <td>3h 00m</td>
+              <td>2h 00m</td>
+              <td>0h 15m</td>
+              <td>5h 15m</td>
+            </tr>
+            <tr>
+              <td><span class="badge b-phys">⚡ Physics</span></td>
+              <td>0h 00m</td>
+              <td>2h 45m</td>
+              <td>0h 15m</td>
+              <td>3h 00m 🚀</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- MEALS & PERSONAL CARE -->
+    <section id="meals" class="section grid grid-2">
+      <div class="card">
+        <h3 class="card-title">🍽️ Fixed Meal Timings</h3>
+        <div class="timeline">
+          <div class="row"><div class="time">7:30–7:45 AM</div><div><div class="what">Breakfast (15 min) — Light, protein-rich</div></div></div>
+          <div class="row"><div class="time">1:45–2:15 PM</div><div><div class="what">Lunch (30 min) — Balanced meal + short rest (within time)</div></div></div>
+          <div class="row"><div class="time">5:30–5:45 PM</div><div><div class="what">Evening snack (15 min) — Nuts/fruits for brain</div></div></div>
+          <div class="row"><div class="time">8:45–9:30 PM</div><div><div class="what">Dinner (45 min) — Family time included</div></div></div>
+        </div>
+      </div>
+      <div class="card">
+        <h3 class="card-title">💆 Personal Care</h3>
+        <div class="timeline">
+          <div class="row"><div class="time">7:10–7:30 AM</div><div><div class="what">Morning bath + fresh up (20 min)</div></div></div>
+          <div class="row"><div class="time">5:30–5:45 PM</div><div><div class="what">Evening walk/stretch (15 min) — Blood circulation</div></div></div>
+          <div class="row"><div class="time">11:45 PM–12:00 AM</div><div><div class="what">Night routine + next day planning (15 min)</div></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STUDY LOGIC -->
+    <section id="logic" class="section grid grid-3">
+      <div class="card">
+        <h3 class="card-title">🌅 Morning Zone (6h)</h3>
+        <p class="sub">Best for new concept learning and memory formation with Biology new chapters and Chemistry mechanisms while the mind is fresh. </p>
+        <div class="timeline">
+          <div class="row"><div class="time">Why</div><div><div class="what">Peak cognitive performance • Fresh focus window</div></div></div>
+        </div>
+      </div>
+      <div class="card">
+        <h3 class="card-title">☀️ Afternoon Zone (6.5h)</h3>
+        <p class="sub">Best for practice, revision, and problem-solving including Physics theory + numericals, Biology reinforcement, and Chemistry problems. </p>
+        <div class="timeline">
+          <div class="row"><div class="time">Why</div><div><div class="what">Sustained focus period • Ideal for application</div></div></div>
+        </div>
+      </div>
+      <div class="card">
+        <h3 class="card-title">🌙 Night Zone (2.5h)</h3>
+        <p class="sub">Best for memory consolidation with Biology MCQs and formula reviews that reinforce learning just before sleep. </p>
+        <div class="timeline">
+          <div class="row"><div class="time">Why</div><div><div class="what">Brain prepares for sleep consolidation</div></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MONTHLY ROADMAP -->
+    <section id="roadmap" class="section grid grid-2">
+      <div class="card">
+        <h3 class="card-title">📘 Sep 2025 — Class 11 Foundation</h3>
+        <div class="timeline">
+          <div class="row"><div class="time">Biology</div><div><div class="what">5 chapters (Diversity, Cell, Biomolecules)</div></div></div>
+          <div class="row"><div class="time">Chemistry</div><div><div class="what">Basic concepts, Atomic structure, Bonding</div></div></div>
+          <div class="row"><div class="time">Physics</div><div><div class="what">Mechanics basics, Units & Measurements</div></div></div>
+        </div>
+      </div>
+      <div class="card">
+        <h3 class="card-title">📗 Oct–Nov 2025 — Class 11 Completion</h3>
+        <div class="timeline">
+          <div class="row"><div class="time">Biology</div><div><div class="what">Physiology, Respiration, Circulation</div></div></div>
+          <div class="row"><div class="time">Chemistry</div><div><div class="what">Organic basics, Hydrocarbons, Thermodynamics</div></div></div>
+          <div class="row"><div class="time">Physics</div><div><div class="what">Oscillations, Waves, Gravitation</div></div></div>
+        </div>
+      </div>
+      <div class="card">
+        <h3 class="card-title">📙 Dec 2025–Feb 2026 — Class 12 Marathon</h3>
+        <div class="timeline">
+          <div class="row"><div class="time">Biology</div><div><div class="what">Human Physiology, Reproduction, Genetics</div></div></div>
+          <div class="row"><div class="time">Chemistry</div><div><div class="what">Organic reactions, Coordination, Electrochemistry</div></div></div>
+          <div class="row"><div class="time">Physics</div><div><div class="what">Modern Physics, Electronics, EMI</div></div></div>
+        </div>
+      </div>
+      <div class="card">
+        <h3 class="card-title">🎯 Mar–Apr 2026 — Testing & Optimization</h3>
+        <div class="timeline">
+          <div class="row"><div class="time">Mocks</div><div><div class="what">Daily mock tests in Chem/Physics slots</div></div></div>
+          <div class="row"><div class="time">Biology</div><div><div class="what">Continuous revision pipeline maintained</div></div></div>
+          <div class="row"><div class="time">Targeting</div><div><div class="what">Evening weak-area practice iterated</div></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TRACKING -->
+    <section id="tracking" class="section grid grid-2">
+      <div class="card">
+        <h3 class="card-title">✅ Daily Checklist</h3>
+        <div class="timeline">
+          <div class="row"><div class="time">Study</div><div><div class="what">14.5 hours completed</div></div></div>
+          <div class="row"><div class="time">Practice</div><div><div class="what">200+ MCQs solved</div></div></div>
+          <div class="row"><div class="time">Health</div><div><div class="what">All meal times maintained</div></div></div>
+          <div class="row"><div class="time">Sleep</div><div><div class="what">7 hours sleep achieved</div></div></div>
+          <div class="row"><div class="time">Plan</div><div><div class="what">Next day planned</div></div></div>
+        </div>
+      </div>
+      <div class="card">
+        <h3 class="card-title">🎯 Weekly Goals</h3>
+        <div class="timeline">
+          <div class="row"><div class="time">Priority</div><div><div class="what">Subject targets met</div></div></div>
+          <div class="row"><div class="time">Scores</div><div><div class="what">Mock test improvement</div></div></div>
+          <div class="row"><div class="time">Progress</div><div><div class="what">Chapter completion on schedule</div></div></div>
+          <div class="row"><div class="time">Health</div><div><div class="what">Parameters maintained</div></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CHANGES + MANTRA -->
+    <section class="section grid grid-2" id="mantra">
+      <div class="card">
+        <h3 class="card-title">🚀 Key Success Changes</h3>
+        <div class="timeline">
+          <div class="row"><div class="time">Physics</div><div><div class="what ok">Increased daily from 2h → 3h (+1h)</div></div></div>
+          <div class="row"><div class="time">Biology</div><div><div class="what warn">Optimized from 7h 15m → 6h (-1h 15m)</div></div></div>
+          <div class="row"><div class="time">Afternoon</div><div><div class="what">Bio revision trimmed 2h 30m → 1h 30m</div></div></div>
+          <div class="row"><div class="time">Physics</div><div><div class="what">Extended 45m → 1h 45m</div></div></div>
+          <div class="row"><div class="time">Other</div><div><div class="what">All other timings remain exactly the same</div></div></div>
+        </div>
+      </div>
+      <div class="card">
+        <h3 class="card-title">💪 Success Mantra</h3>
+        <div class="quote" id="mantraText">“Treat meal times and sleep as non-negotiable as study sessions. This routine for 8 months = NEET 2026 SUCCESS!”</div>
+        <p class="sub">Final Goal: NEET 2026 — <span id="goal-days">…</span> Days to Go! • MD Soliuddin | Consistency + Discipline = Medical College 🏥</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      © 2025 • NEET 2026 Master Routine • Optimized for Phone • Tablet • Laptop
+    </div>
+  </footer>
+
+  <!-- Back to top -->
+  <button id="backTop" class="btn" aria-label="Back to top" title="Back to top">⬆</button>
+
+  <script>
+    // Mobile menu toggle
+    (function(){
+      const toggle = document.querySelector('.menu-toggle');
+      const links = document.getElementById('site-links');
+      toggle.addEventListener('click', () => {
+        const open = links.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', String(open));
+      });
+    })();
+
+    // Back to top reveal + behavior (earlier threshold, keyboard-supported)
+    (function(){
+      const btn = document.getElementById('backTop');
+      const prefersReduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 400) btn.classList.add('show'); else btn.classList.remove('show');
+      }, { passive: true });
+      function goTop(){
+        if (prefersReduce) { window.scrollTo(0,0); }
+        else { window.scrollTo({ top:0, behavior:'smooth' }); }
+      }
+      btn.addEventListener('click', goTop);
+      btn.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); goTop(); }
+      });
+    })();
+
+    // Real-time countdown to NEET 2026 — 03 May 2026, 00:00 IST
+    (function(){
+      const daysEl = document.getElementById('cd-days');
+      const hoursEl = document.getElementById('cd-hours');
+      const minsEl = document.getElementById('cd-mins');
+      const secsEl = document.getElementById('cd-secs');
+      const goalDaysEl = document.getElementById('goal-days');
+
+      // ISO 8601 with timezone offset ensures consistent cross-device parsing
+      const targetDate = '2026-05-03T00:00:00+05:30';
+      const target = new Date(targetDate).getTime();
+
+      function pad(n, size){ return String(n).padStart(size, '0'); }
+
+      function render(deltaMs){
+        const d = Math.floor(deltaMs / (1000*60*60*24));
+        let r = deltaMs - d * (1000*60*60*24);
+        const h = Math.floor(r / (1000*60*60)); r -= h * (1000*60*60);
+        const m = Math.floor(r / (1000*60)); r -= m * (1000*60);
+        const s = Math.floor(r / 1000);
+
+        daysEl.textContent = pad(Math.max(0, d), 3);
+        hoursEl.textContent = pad(Math.max(0, h), 2);
+        minsEl.textContent = pad(Math.max(0, m), 2);
+        secsEl.textContent = pad(Math.max(0, s), 2);
+        if (goalDaysEl) goalDaysEl.textContent = String(Math.max(0, d));
+      }
+
+      function tick(){
+        const now = Date.now();
+        const delta = Math.max(0, target - now);
+        render(delta);
+        if (delta <= 0) clearInterval(timer);
+      }
+
+      tick();
+      const timer = setInterval(tick, 1000);
+    })();
+
+    // Success mantra rotation every 1 minute
+    (function(){
+      const el = document.getElementById('mantraText');
+      if(!el) return;
+      const mantras = [
+        '“Treat meal times and sleep as non-negotiable as study sessions. This routine for 8 months = NEET 2026 SUCCESS!”',
+        '“Small wins daily → Big results in May 2026. Show up, focus, repeat.”',
+        '“Concepts by morning, practice by afternoon, memory by night — disciplined cycles win.”',
+        '“Physics clarity grows with consistent problems; trust the process.”',
+        '“Organic pathways are maps — revise mechanisms until they feel obvious.”',
+        '“NCERT first, then depth — accuracy beats speed, then speed follows.”'
+      ];
+      let i = 0;
+      function swap(){
+        i = (i + 1) % mantras.length;
+        el.textContent = mantras[i];
+      }
+      // Rotate every 60,000 ms
+      setInterval(swap, 60_000);
+    })();
+  </script>
+</body>
+</html>
