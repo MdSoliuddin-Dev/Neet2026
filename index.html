@@ -555,6 +555,7 @@
         toggle.setAttribute('aria-expanded', String(open));
       });
     })();
+
     // Back to top reveal + behavior
     (function(){
       const btn = document.getElementById('backTop');
@@ -572,36 +573,105 @@
         if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); goTop(); }
       });
     })();
+
     // Real-time countdown to NEET 2026 — 03 May 2026, 00:00 IST
     (function(){
-      const daysEl = document.getElementById('cd-days');
+      const daysEl  = document.getElementById('cd-days');
       const hoursEl = document.getElementById('cd-hours');
-      const minsEl = document.getElementById('cd-mins');
-      const secsEl = document.getElementById('cd-secs');
+      const minsEl  = document.getElementById('cd-mins');
+      const secsEl  = document.getElementById('cd-secs');
       const weeksEl = document.getElementById('cd-weeks');
-      const monthsEl = document.getElementById('cd-months');
+      const monthsEl= document.getElementById('cd-months');
       const goalDaysEl = document.getElementById('goal-days');
 
-      // ISO 8601 with timezone offset ensures consistent cross-device parsing
-      const targetISO = '
+      // Target in ISO 8601 with explicit IST offset for consistent parsing across devices
+      const targetISO = '2026-05-03T00:00:00+05:30';
+      const targetDate = new Date(targetISO); // Uses JS Date in ms since epoch internally
 
-[1](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/setMonth)
-[2](https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-columns)
-[3](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-reduced-motion)
-[4](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)
-[5](https://developer.mozilla.org/en-US/docs/Web/CSS/repeat)
-[6](https://developer.mozilla.org/en-US/docs/Web/CSS/minmax)
-[7](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_media_queries/Using_media_queries_for_accessibility)
-[8](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Date/setMonth)
-[9](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date/setMonth)
-[10](https://www.w3schools.com/jsref/jsref_setmonth.asp)
-[11](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Date/setMonth)
-[12](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout/Basic_concepts_of_grid_layout)
-[13](https://css-tricks.com/almanac/rules/m/media/prefers-reduced-motion/)
-[14](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Date/setMonth)
-[15](https://www.smashingmagazine.com/2021/10/respecting-users-motion-preferences/)
-[16](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Date/setMonth)
-[17](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Date/setMonth)
-[18](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Sec-CH-Prefers-Reduced-Motion)
-[19](https://developer.mozilla.org/en-US/docs/Web/CSS/grid-auto-columns)
-[20](https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/Date/setMonth)
+      function pad(n, size){ return String(n).padStart(size, '0'); }
+
+      // Full calendar months remaining (only counts complete months)
+      function fullMonthsBetween(from, to){
+        // Clone to avoid mutating the original
+        const a = new Date(from.getTime());
+        const b = new Date(to.getTime());
+        let months = (b.getFullYear() - a.getFullYear()) * 12 + (b.getMonth() - a.getMonth());
+        // Move 'a' forward by computed months, then adjust if overshot
+        const test = new Date(a.getTime());
+        test.setMonth(test.getMonth() + months);
+        if (test > b) months -= 1;
+        return Math.max(0, months);
+      }
+
+      function render(nowMs){
+        const nowDate = new Date(nowMs);
+        const deltaMs = Math.max(0, targetDate.getTime() - nowMs);
+
+        // Time units
+        const dTotal = Math.floor(deltaMs / (1000*60*60*24));
+        let r = deltaMs - dTotal * (1000*60*60*24);
+        const h = Math.floor(r / (1000*60*60)); r -= h * (1000*60*60);
+        const m = Math.floor(r / (1000*60)); r -= m * (1000*60);
+        const s = Math.floor(r / 1000);
+
+        // Weeks (floor full weeks remaining)
+        const w = Math.floor(deltaMs / (1000*60*60*24*7));
+
+        // Months (calendar full months remaining)
+        const mon = fullMonthsBetween(nowDate, targetDate);
+
+        // Paint
+        if (daysEl)   daysEl.textContent   = pad(dTotal, 3);
+        if (hoursEl)  hoursEl.textContent  = pad(h, 2);
+        if (minsEl)   minsEl.textContent   = pad(m, 2);
+        if (secsEl)   secsEl.textContent   = pad(s, 2);
+        if (weeksEl)  weeksEl.textContent  = pad(w, 3);
+        if (monthsEl) monthsEl.textContent = pad(mon, 2);
+        if (goalDaysEl) goalDaysEl.textContent = String(dTotal);
+      }
+
+      function tick(){
+        const now = Date.now();
+        render(now);
+        if (targetDate.getTime() - now <= 0) clearInterval(timer);
+      }
+
+      tick();
+      const timer = setInterval(tick, 1000);
+    })();
+
+    // Success mantra rotation
+    (function(){
+      const el = document.getElementById('mantraText');
+      if(!el) return;
+      const mantras = [
+        `“Treat meal times and sleep as non-negotiable as study sessions. This routine for 8 months = NEET 2026 SUCCESS!”`,
+        `“Small wins daily → Big results in May 2026. Show up, focus, repeat.”`,
+        `“Concepts by morning, practice by afternoon, memory by night — disciplined cycles win.”`,
+        `“Physics clarity grows with consistent problems; trust the process.”`,
+        `“Organic pathways are maps — revise mechanisms until they feel obvious.”`,
+        `“NCERT first, then depth — accuracy beats speed, then speed follows.”`,
+        `“NEET UG isnt about studying more its about practicing SMARTER!”`,
+        `“Believe you can and you’re halfway there.”`,
+        `“The best way to predict the future is to create it.”`,
+        `“It does not matter how slowly you go as long as you do not stop.”`,
+        `“Your limitation—it’s only your imagination.”`,
+        `“Push yourself, because no one else is going to do it for you.”`,
+        `“Do something today that your future self will thank you for.”`,
+        `“The difference between ordinary and extraordinary is that little extra.”`,
+        `“Success doesn’t just find you. You have to go out and get it.”`,
+        `“If you can dream it, you can do it.”`,
+        `“Winners are not people who never fail, but people who never quit.”`,
+        `“Don’t stop when you’re tired. Stop when you’re done.”`,
+        `“Great things never come from comfort zones.”`
+      ];
+      let i = 0;
+      function swap(){
+        i = (i + 1) % mantras.length;
+        el.textContent = mantras[i];
+      }
+      setInterval(swap, 5000);
+    })();
+  </script>
+</body>
+</html>
