@@ -7,7 +7,7 @@
   <meta name="theme-color" content="#0b0f1a" />
   <style>
     :root{
-      --bg: #0b0f1a;
+      --bg: #090c17;
       --bg-soft: #0f1526;
       --card: rgba(255,255,255,0.06);
       --card-strong: rgba(255,255,255,0.1);
@@ -22,21 +22,20 @@
       --bio: #7ee787;
       --chem: #79c0ff;
       --phys: #ffb86c;
-      --shadow: 0 10px 30px rgba(0,0,0,0.35);
+      --shadow: 0 12px 40px rgba(0,0,0,0.4);
       --radius: 18px;
       --radius-sm: 12px;
       --radius-lg: 24px;
       --mx: 20px;
       --maxw: 1200px;
       --ring: 2px solid rgba(106, 228, 255, .45);
+      --ring-strong: 2px solid rgba(139, 107, 255, .45);
     }
-
     *{box-sizing:border-box}
     html,body{height:100%}
     @media (prefers-reduced-motion: no-preference){
       html{ scroll-behavior:smooth; }
     }
-
     body{
       margin:0;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
@@ -48,8 +47,6 @@
       background-attachment: fixed;
       line-height:1.55;
     }
-
-    /* Skip link */
     .skip-link{
       position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden;
     }
@@ -58,11 +55,10 @@
       background:var(--bg-soft); color:var(--text); border-radius:10px; border:1px solid var(--border);
       outline:none;
     }
-
-    /* Sticky, glassy navbar with mobile menu */
+    /* Navbar */
     .nav {
       position: sticky; top:0; z-index: 100;
-      backdrop-filter: blur(10px);
+      backdrop-filter: blur(12px);
       background: rgba(8,12,22,0.55);
       border-bottom: 1px solid var(--border);
     }
@@ -70,25 +66,21 @@
       max-width: var(--maxw); margin:0 auto; padding: 10px var(--mx);
       display:flex; align-items:center; gap:14px; justify-content: space-between;
     }
-    .brand{
-      display:flex; align-items:center; gap:10px; font-weight:800; letter-spacing: .3px;
-    }
+    .brand{ display:flex; align-items:center; gap:10px; font-weight:800; letter-spacing: .3px; }
     .brand-badge{
       width:34px; height:34px; border-radius:10px;
       background: linear-gradient(135deg, var(--accent), var(--accent-2));
       display:grid; place-items:center; color:#0b0f1a; font-weight:900;
       box-shadow: var(--shadow);
     }
-
     .links{ display:flex; align-items:center; gap:6px; flex-wrap:wrap; }
     .links a{
       color:var(--muted); text-decoration:none; font-weight:700; font-size:14px;
-      padding:8px 10px; border-radius:10px;
+      padding:8px 10px; border-radius:10px; transition: background .2s ease, color .2s ease;
     }
     .links a:hover, .links a:focus-visible{
       color:var(--text); background: rgba(255,255,255,0.06); outline:none;
     }
-
     .menu-toggle{ display:none; }
     @media (max-width: 860px){
       .menu-toggle{ display:inline-flex; align-items:center; gap:6px; }
@@ -96,8 +88,8 @@
               background: rgba(8,12,22,0.92); border-bottom:1px solid var(--border); }
       .links.open{ display:flex; flex-wrap:wrap; }
     }
-
     header, main, footer { scroll-margin-top: 84px; }
+    /* Hero */
     .hero{
       padding: 40px var(--mx) 24px;
       border-bottom: 1px solid var(--border);
@@ -114,21 +106,22 @@
       letter-spacing: .2px;
     }
     .subtitle{ color:var(--muted); margin: 0 0 22px; font-weight:700; }
-
     /* Countdown */
     .countdown{
-      display:grid; grid-template-columns: repeat(4, minmax(82px, 1fr));
-      gap:14px; max-width: 780px;
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap:14px; max-width: 100%;
     }
     .time-card{
       position:relative;
-      background: var(--card);
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
       border:1px solid var(--border);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
-      padding: 14px;
+      padding: 16px;
       display:grid; place-items:center; overflow:hidden;
       isolation:isolate;
+      transition: transform .18s ease, border-color .18s ease;
     }
     .time-card::before{
       content:"";
@@ -138,6 +131,7 @@
       transform: rotate(0deg);
       transition: opacity .3s ease;
     }
+    .time-card:hover{ transform: translateY(-2px); border-color: rgba(106, 228, 255, .35); }
     .time-card:hover::before{ opacity: .28; }
     @media (prefers-reduced-motion: no-preference){
       @keyframes spin { to { transform: rotate(360deg); } }
@@ -151,31 +145,29 @@
       -webkit-background-clip: text; background-clip: text; color: transparent;
     }
     .time-label{ color:var(--muted); font-weight:800 }
-
     .hero-tags{ margin-top: 18px; display:flex; flex-wrap: wrap; gap:10px; }
     .chip{
       padding:8px 12px; border-radius: 100px; border:1px solid var(--border);
       background: rgba(255,255,255,0.06); color:var(--muted); font-weight:800; font-size: 13px;
     }
-
     /* Layout */
     .wrap{ max-width: var(--maxw); margin: 0 auto; padding: 28px var(--mx) 90px; container-type: inline-size; }
     .section{ margin-top: 28px; container-type: inline-size; }
     .h2{ font-size: clamp(18px, 2.4vw, 28px); font-weight: 900; margin: 0 0 12px; }
     .sub{ color:var(--muted); margin: 0 0 16px; font-weight:700; }
-
     .grid{ display:grid; gap:16px; grid-template-columns: 1fr; }
     @container (inline-size > 740px){ .grid-2{ grid-template-columns: 1fr 1fr; } }
     @container (inline-size > 1020px){ .grid-3{ grid-template-columns: 1fr 1fr 1fr; } }
-
     .card{
       position:relative; overflow:hidden; isolation:isolate;
-      background: var(--card);
+      background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.01));
       border:1px solid var(--border);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
       padding: 16px;
+      transition: border-color .2s ease;
     }
+    .card:hover{ border-color: rgba(139,107,255,.3); }
     .card::after{
       content:"";
       position:absolute; inset:0; border-radius: inherit;
@@ -183,7 +175,6 @@
                   radial-gradient(600px 160px at 110% -30%, rgba(139,107,255,0.10), transparent 60%);
       z-index:-1;
     }
-
     .card-title{ display:flex; align-items:center; gap:10px; margin:0 0 8px; font-weight: 900; }
     .pill{
       padding:6px 10px; border-radius: 10px; font-weight:900; font-size: 12px;
@@ -192,7 +183,6 @@
     .tag-bio{ color: var(--bio) }
     .tag-chem{ color: var(--chem) }
     .tag-phys{ color: var(--phys) }
-
     .timeline{ display:grid; gap:10px; }
     .row{
       display:flex; gap:12px; align-items:flex-start;
@@ -202,7 +192,6 @@
     .time{ min-width: 112px; font-weight:900; color:var(--muted) }
     .what{ font-weight:800 }
     .hint{ color:var(--muted); font-weight:700 }
-
     /* Table */
     .table{ width:100%; border-collapse: collapse; overflow:hidden; border-radius: var(--radius); border:1px solid var(--border); }
     .table th, .table td{ padding:12px 14px; border-bottom:1px solid var(--border); text-align:left; }
@@ -214,15 +203,12 @@
     .b-bio{ background: rgba(126,231,135,0.12); color: var(--bio) }
     .b-chem{ background: rgba(121,192,255,0.12); color: var(--chem) }
     .b-phys{ background: rgba(255,184,108,0.12); color: var(--phys) }
-
-    /* Quote */
     .quote{
       font-size: clamp(16px, 2.2vw, 20px);
       font-weight:900; line-height:1.4; padding: 16px;
       border-radius: var(--radius); border:1px solid var(--border);
       background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
     }
-
     /* Footer */
     .footer{
       margin-top: 28px; padding: 18px var(--mx);
@@ -231,15 +217,12 @@
       background: rgba(255,255,255,0.03);
     }
     .footer-inner{ max-width: var(--maxw); margin: 0 auto; font-weight:800 }
-
-    /* A11y and utilities */
     :focus-visible{ outline: var(--ring); outline-offset: 2px; }
     .row .mark{ font-weight:900 }
     .ok{ color: var(--success) }
     .warn{ color: var(--warning) }
     .danger{ color: var(--danger) }
-
-    /* Back to top button (enhanced) */
+    /* Back to top */
     #backTop{
       position: fixed; right:16px; bottom:16px; z-index:90;
       width:48px; height:48px; border-radius:999px;
@@ -256,7 +239,6 @@
 </head>
 <body>
   <a class="skip-link" href="#overview">Skip to content</a>
-
   <!-- NAV -->
   <div class="nav">
     <div class="nav-inner">
@@ -280,13 +262,11 @@
       </div>
     </div>
   </div>
-
   <!-- HERO -->
   <header class="hero">
     <div class="hero-inner">
       <h1 class="title">🏆 NEET 2026 MASTER ROUTINE</h1>
-      <p class="subtitle">Complete Daily Life & Study Schedule • MD Soliuddin — NEET Aspirant 2026</p>
-
+      <p class="subtitle">Complete Daily Life & Study Schedule -  MD Soliuddin — NEET Aspirant 2026</p>
       <div class="countdown" aria-label="Countdown to NEET 2026">
         <div class="time-card" aria-live="polite">
           <div id="cd-days" class="time-value">000</div>
@@ -304,23 +284,29 @@
           <div id="cd-secs" class="time-value">00</div>
           <div class="time-label">Seconds</div>
         </div>
+        <!-- NEW: Weeks and Months -->
+        <div class="time-card" aria-live="polite">
+          <div id="cd-weeks" class="time-value">000</div>
+          <div class="time-label">Weeks</div>
+        </div>
+        <div class="time-card" aria-live="polite">
+          <div id="cd-months" class="time-value">00</div>
+          <div class="time-label">Months</div>
+        </div>
       </div>
-
       <div class="hero-tags">
         <span class="chip">Exam Date: 03 May 2026 (IST)</span>
         <span class="chip">Live Countdown</span>
-        <span class="chip">Responsive • Phone • Tablet • Laptop</span>
+        <span class="chip">Responsive -  Phone -  Tablet -  Laptop</span>
       </div>
     </div>
   </header>
-
   <main class="wrap" id="overview">
     <!-- OVERVIEW -->
     <section class="section">
       <h2 class="h2">⏰ Daily Schedule Overview (7:00 AM – 12:00 AM)</h2>
       <p class="sub">A high-performance routine with fixed meals and sleep for sustained focus and long-term retention across Biology, Chemistry, and Physics. </p>
     </section>
-
     <!-- DAILY BLOCKS -->
     <section id="blocks" class="section grid grid-3">
       <!-- Morning -->
@@ -336,7 +322,6 @@
           <div class="row"><div class="time">1:45 PM</div><div><div class="what">🍽️ Lunch + Rest <span class="hint">(30 min)</span></div></div></div>
         </div>
       </div>
-
       <!-- Afternoon -->
       <div class="card">
         <h3 class="card-title">☀️ Afternoon Energy Block <span class="pill">2:15 PM – 8:45 PM</span></h3>
@@ -348,7 +333,6 @@
           <div class="row"><div class="time">7:45 PM</div><div><div class="what">⚡ <span class="mark tag-phys">PHYSICS</span> — Numericals <span class="hint">(1h) [CALCULATION]</span></div></div></div>
         </div>
       </div>
-
       <!-- Evening -->
       <div class="card">
         <h3 class="card-title">🌙 Evening Consolidation Block <span class="pill">8:45 PM – 12:00 AM</span></h3>
@@ -363,30 +347,27 @@
         </div>
       </div>
     </section>
-
     <!-- WEEKLY PRIORITY -->
     <section id="weekly" class="section grid grid-3">
       <div class="card">
-        <h3 class="card-title">🧬 Biology Dominant Days <span class="pill">Mon • Wed • Fri</span></h3>
+        <h3 class="card-title">🧬 Biology Dominant Days <span class="pill">Mon -  Wed -  Fri</span></h3>
         <p class="sub"><span class="mark tag-bio">Total Biology Time: 6 hours</span></p>
         <div class="timeline">
           <div class="row"><div class="time">Morning</div><div><div class="what">BIOLOGY — 2h 45m (New chapters)</div></div></div>
           <div class="row"><div class="time">Afternoon</div><div><div class="what">BIOLOGY — 1h 30m (Revision + Diagrams)</div></div></div>
           <div class="row"><div class="time">Night</div><div><div class="what">BIOLOGY — 1h 45m (MCQs + Memory)</div></div></div>
-          <div class="row"><div class="time">Focus</div><div><div class="what">Human Physiology • Plant Physiology • Genetics</div></div></div>
+          <div class="row"><div class="time">Focus</div><div><div class="what">Human Physiology -  Plant Physiology -  Genetics</div></div></div>
         </div>
       </div>
-
       <div class="card">
-        <h3 class="card-title">⚗️ Chemistry Dominant Days <span class="pill">Tue • Thu • Sat</span></h3>
+        <h3 class="card-title">⚗️ Chemistry Dominant Days <span class="pill">Tue -  Thu -  Sat</span></h3>
         <p class="sub"><span class="mark tag-chem">Total Chemistry Time: 6 hours</span></p>
         <div class="timeline">
           <div class="row"><div class="time">Morning</div><div><div class="what">CHEMISTRY — 3h 30m (New concepts + Organic)</div></div></div>
           <div class="row"><div class="time">Evening</div><div><div class="what">CHEMISTRY — 2h 30m (Problems + Inorganic)</div></div></div>
-          <div class="row"><div class="time">Focus</div><div><div class="what">Organic reactions • Physical numericals • Inorganic facts</div></div></div>
+          <div class="row"><div class="time">Focus</div><div><div class="what">Organic reactions -  Physical numericals -  Inorganic facts</div></div></div>
         </div>
       </div>
-
       <div class="card">
         <h3 class="card-title">📊 Balanced Review Day <span class="pill">Sunday</span></h3>
         <div class="timeline">
@@ -396,7 +377,6 @@
         </div>
       </div>
     </section>
-
     <!-- TIME DISTRIBUTION TABLE -->
     <section id="distribution" class="section">
       <h2 class="h2">📈 Daily Time Distribution</h2>
@@ -437,7 +417,6 @@
         </table>
       </div>
     </section>
-
     <!-- MEALS & PERSONAL CARE -->
     <section id="meals" class="section grid grid-2">
       <div class="card">
@@ -458,21 +437,20 @@
         </div>
       </div>
     </section>
-
     <!-- STUDY LOGIC -->
     <section id="logic" class="section grid grid-3">
       <div class="card">
         <h3 class="card-title">🌅 Morning Zone (6h)</h3>
         <p class="sub">Best for new concept learning and memory formation with Biology new chapters and Chemistry mechanisms while the mind is fresh. </p>
         <div class="timeline">
-          <div class="row"><div class="time">Why</div><div><div class="what">Peak cognitive performance • Fresh focus window</div></div></div>
+          <div class="row"><div class="time">Why</div><div><div class="what">Peak cognitive performance -  Fresh focus window</div></div></div>
         </div>
       </div>
       <div class="card">
         <h3 class="card-title">☀️ Afternoon Zone (6.5h)</h3>
         <p class="sub">Best for practice, revision, and problem-solving including Physics theory + numericals, Biology reinforcement, and Chemistry problems. </p>
         <div class="timeline">
-          <div class="row"><div class="time">Why</div><div><div class="what">Sustained focus period • Ideal for application</div></div></div>
+          <div class="row"><div class="time">Why</div><div><div class="what">Sustained focus period -  Ideal for application</div></div></div>
         </div>
       </div>
       <div class="card">
@@ -483,7 +461,6 @@
         </div>
       </div>
     </section>
-
     <!-- MONTHLY ROADMAP -->
     <section id="roadmap" class="section grid grid-2">
       <div class="card">
@@ -519,7 +496,6 @@
         </div>
       </div>
     </section>
-
     <!-- TRACKING -->
     <section id="tracking" class="section grid grid-2">
       <div class="card">
@@ -542,7 +518,6 @@
         </div>
       </div>
     </section>
-
     <!-- CHANGES + MANTRA -->
     <section class="section grid grid-2" id="mantra">
       <div class="card">
@@ -558,34 +533,32 @@
       <div class="card">
         <h3 class="card-title">💪 Success Mantra</h3>
         <div class="quote" id="mantraText">“Treat meal times and sleep as non-negotiable as study sessions. This routine for 8 months = NEET 2026 SUCCESS!”</div>
-        <p class="sub">Final Goal: NEET 2026 — <span id="goal-days">…</span> Days to Go! • MD Soliuddin | Consistency + Discipline = Medical College 🏥</p>
+        <p class="sub">Final Goal: NEET 2026 — <span id="goal-days">…</span> Days to Go! -  MD Soliuddin | Consistency + Discipline = Medical College 🏥</p>
       </div>
     </section>
   </main>
-
   <footer class="footer">
     <div class="footer-inner">
-      © 2025 • NEET 2026 Master Routine • Optimized for Phone • Tablet • Laptop
+      © 2025 -  NEET 2026 Master Routine -  Optimized for Phone -  Tablet -  Laptop
     </div>
   </footer>
-
   <!-- Back to top -->
   <button id="backTop" class="btn" aria-label="Back to top" title="Back to top">⬆</button>
-
   <script>
     // Mobile menu toggle
     (function(){
       const toggle = document.querySelector('.menu-toggle');
       const links = document.getElementById('site-links');
+      if(!toggle || !links) return;
       toggle.addEventListener('click', () => {
         const open = links.classList.toggle('open');
         toggle.setAttribute('aria-expanded', String(open));
       });
     })();
-
     // Back to top reveal + behavior
     (function(){
       const btn = document.getElementById('backTop');
+      if(!btn) return;
       const prefersReduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       window.addEventListener('scroll', () => {
         if (window.scrollY > 400) btn.classList.add('show'); else btn.classList.remove('show');
@@ -599,81 +572,36 @@
         if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); goTop(); }
       });
     })();
-
     // Real-time countdown to NEET 2026 — 03 May 2026, 00:00 IST
     (function(){
       const daysEl = document.getElementById('cd-days');
       const hoursEl = document.getElementById('cd-hours');
       const minsEl = document.getElementById('cd-mins');
       const secsEl = document.getElementById('cd-secs');
+      const weeksEl = document.getElementById('cd-weeks');
+      const monthsEl = document.getElementById('cd-months');
       const goalDaysEl = document.getElementById('goal-days');
 
       // ISO 8601 with timezone offset ensures consistent cross-device parsing
-      const targetDate = '2026-05-03T00:00:00+05:30';
-      const target = new Date(targetDate).getTime();
+      const targetISO = '
 
-      function pad(n, size){ return String(n).padStart(size, '0'); }
-
-      function render(deltaMs){
-        const d = Math.floor(deltaMs / (1000*60*60*24));
-        let r = deltaMs - d * (1000*60*60*24);
-        const h = Math.floor(r / (1000*60*60)); r -= h * (1000*60*60);
-        const m = Math.floor(r / (1000*60)); r -= m * (1000*60);
-        const s = Math.floor(r / 1000);
-
-        daysEl.textContent = pad(Math.max(0, d), 3);
-        hoursEl.textContent = pad(Math.max(0, h), 2);
-        minsEl.textContent = pad(Math.max(0, m), 2);
-        secsEl.textContent = pad(Math.max(0, s), 2);
-        if (goalDaysEl) goalDaysEl.textContent = String(Math.max(0, d));
-      }
-
-      function tick(){
-        const now = Date.now();
-        const delta = Math.max(0, target - now);
-        render(delta);
-        if (delta <= 0) clearInterval(timer);
-      }
-
-      tick();
-      const timer = setInterval(tick, 1000);
-    })();
-
-    // Success mantra rotation every 1 minute (with extended quotes)
-    (function(){
-      const el = document.getElementById('mantraText');
-      if(!el) return;
-
-      const mantras = [
-        `“Treat meal times and sleep as non-negotiable as study sessions. This routine for 8 months = NEET 2026 SUCCESS!”`,
-        `“Small wins daily → Big results in May 2026. Show up, focus, repeat.”`,
-        `“Concepts by morning, practice by afternoon, memory by night — disciplined cycles win.”`,
-        `“Physics clarity grows with consistent problems; trust the process.”`,
-        `“Organic pathways are maps — revise mechanisms until they feel obvious.”`,
-        `“NCERT first, then depth — accuracy beats speed, then speed follows.”`,
-        `“NEET UG isnt about studying more its about practicing SMARTER!”`,
-        `“Believe you can and you’re halfway there.”`,
-        `“The best way to predict the future is to create it.”`,
-        `“It does not matter how slowly you go as long as you do not stop.”`,
-        `“Your limitation—it’s only your imagination.”`,
-        `“Push yourself, because no one else is going to do it for you.”`,
-        `“Do something today that your future self will thank you for.”`,
-        `“The difference between ordinary and extraordinary is that little extra.”`,
-        `“Success doesn’t just find you. You have to go out and get it.”`,
-        `“If you can dream it, you can do it.”`,
-        `“Winners are not people who never fail, but people who never quit.”`,
-        `“Don’t stop when you’re tired. Stop when you’re done.”`,
-        `“Great things never come from comfort zones.”`
-      ];
-
-      let i = 0;
-      function swap(){
-        i = (i + 1) % mantras.length;
-        el.textContent = mantras[i];
-      }
-      // Rotate every 5,000 ms
-      setInterval(swap, 5_000);
-    })();
-  </script>
-</body>
-</html>
+[1](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/setMonth)
+[2](https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-columns)
+[3](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-reduced-motion)
+[4](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)
+[5](https://developer.mozilla.org/en-US/docs/Web/CSS/repeat)
+[6](https://developer.mozilla.org/en-US/docs/Web/CSS/minmax)
+[7](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_media_queries/Using_media_queries_for_accessibility)
+[8](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Date/setMonth)
+[9](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date/setMonth)
+[10](https://www.w3schools.com/jsref/jsref_setmonth.asp)
+[11](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Date/setMonth)
+[12](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout/Basic_concepts_of_grid_layout)
+[13](https://css-tricks.com/almanac/rules/m/media/prefers-reduced-motion/)
+[14](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Date/setMonth)
+[15](https://www.smashingmagazine.com/2021/10/respecting-users-motion-preferences/)
+[16](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Date/setMonth)
+[17](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Date/setMonth)
+[18](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Sec-CH-Prefers-Reduced-Motion)
+[19](https://developer.mozilla.org/en-US/docs/Web/CSS/grid-auto-columns)
+[20](https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/Date/setMonth)
