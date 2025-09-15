@@ -430,6 +430,12 @@
       </div>
       <div class="card">
         <h3 class="card-title">💆 Personal Care</h3>
+        <!-- ADDED LINK -->
+        <p style="margin:8px 0 12px">
+          <a class="chip" href="https://mdsoliuddin-dev.github.io/Daily-Basis-Health-Schedule/" target="_blank" rel="noopener noreferrer">
+            Daily Basis Health Schedule ↗
+          </a>
+        </p>
         <div class="timeline">
           <div class="row"><div class="time">7:10–7:30 AM</div><div><div class="what">Morning bath + fresh up (20 min)</div></div></div>
           <div class="row"><div class="time">5:30–5:45 PM</div><div><div class="what">Evening walk/stretch (15 min) — Blood circulation</div></div></div>
@@ -555,7 +561,6 @@
         toggle.setAttribute('aria-expanded', String(open));
       });
     })();
-
     // Back to top reveal + behavior
     (function(){
       const btn = document.getElementById('backTop');
@@ -573,7 +578,6 @@
         if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); goTop(); }
       });
     })();
-
     // Real-time countdown to NEET 2026 — 03 May 2026, 00:00 IST
     (function(){
       const daysEl  = document.getElementById('cd-days');
@@ -583,13 +587,10 @@
       const weeksEl = document.getElementById('cd-weeks');
       const monthsEl= document.getElementById('cd-months');
       const goalDaysEl = document.getElementById('goal-days');
-
       // Target in ISO 8601 with explicit IST offset for consistent parsing across devices
       const targetISO = '2026-05-03T00:00:00+05:30';
       const targetDate = new Date(targetISO); // Uses JS Date in ms since epoch internally
-
       function pad(n, size){ return String(n).padStart(size, '0'); }
-
       // Full calendar months remaining (only counts complete months)
       function fullMonthsBetween(from, to){
         // Clone to avoid mutating the original
@@ -602,24 +603,19 @@
         if (test > b) months -= 1;
         return Math.max(0, months);
       }
-
       function render(nowMs){
         const nowDate = new Date(nowMs);
         const deltaMs = Math.max(0, targetDate.getTime() - nowMs);
-
         // Time units
         const dTotal = Math.floor(deltaMs / (1000*60*60*24));
         let r = deltaMs - dTotal * (1000*60*60*24);
         const h = Math.floor(r / (1000*60*60)); r -= h * (1000*60*60);
         const m = Math.floor(r / (1000*60)); r -= m * (1000*60);
         const s = Math.floor(r / 1000);
-
         // Weeks (floor full weeks remaining)
         const w = Math.floor(deltaMs / (1000*60*60*24*7));
-
         // Months (calendar full months remaining)
         const mon = fullMonthsBetween(nowDate, targetDate);
-
         // Paint
         if (daysEl)   daysEl.textContent   = pad(dTotal, 3);
         if (hoursEl)  hoursEl.textContent  = pad(h, 2);
@@ -629,17 +625,14 @@
         if (monthsEl) monthsEl.textContent = pad(mon, 2);
         if (goalDaysEl) goalDaysEl.textContent = String(dTotal);
       }
-
       function tick(){
         const now = Date.now();
         render(now);
         if (targetDate.getTime() - now <= 0) clearInterval(timer);
       }
-
       tick();
       const timer = setInterval(tick, 1000);
     })();
-
     // Success mantra rotation
     (function(){
       const el = document.getElementById('mantraText');
